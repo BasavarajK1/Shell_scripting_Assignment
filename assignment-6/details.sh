@@ -17,8 +17,8 @@ B=$(echo "Movie Name is : $b")
 C=$(echo "Language is : $c")
 D=$(echo "Price is : $d")
 E=$(echo "Date of Release is : $e")
-echo "$A; $B; $C; $D; $E" >> details
+echo "$A; $B; $C; $D; $E" >> details.txt
 echo "The details are as follows:"
-cat details
+cat details.txt
 
 

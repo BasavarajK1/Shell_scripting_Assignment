@@ -8,7 +8,19 @@ read b
 if [ -r $a -a $b ]
 then 
 	echo "File has read permission"
-	cat $a >> $b
+
+elif [ -f $b ]
+then
+	echo "Do you want to over write? [y/n]"
+	read c
+elif [ $c -eq y ]
+then
+	d=$(cat $a > $b)
+	echo $d
+elif [ $c -eq n ]
+then
+	e=$(cat $a >> $b)
 else
 	echo "FIle has no read permission"
+ 
 fi
