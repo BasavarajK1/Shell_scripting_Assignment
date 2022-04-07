@@ -1,0 +1,5 @@
+total 12K
+-rw-rw-r-- 1 ubuntu ubuntu   0 Apr  7 09:58 abcd.txt
+-rw-rw-r-- 1 ubuntu ubuntu  26 Apr  7 09:45 listoffiles.sh
+-rw-rw-r-- 1 ubuntu ubuntu  45 Apr  7 09:19 ssh.sh
+-rw-rw-r-- 1 ubuntu ubuntu 232 Apr  7 05:22 alerttoslack.sh
