@@ -1,10 +1,82 @@
 #!/bin/bash
 
-echo "Enter filename: "
-read a
+echo  "Enter file name : "
+read file
 
-for a in *
-do
-	if [ -r $a && -w $a && -x $a ]
-	then
-		test 
+[ -r $file ] && R="Read = Yes" || R="Read = No"
+
+[ -w $file ] && W="Write = Yes" || W="Write = No"
+
+[ -x $file ] && X="Execute = Yes" || X="Execute = No"
+
+echo "File permission for onwer"
+ur=`ls -l $file | cut -c2`
+uw=`ls -l $file | cut -c3`
+ux=` ls -l $file | cut -c4`
+     if [ $ur == r ]
+     then
+        echo "$file owner has read permission"
+        fi
+        if [ $uw == w ]
+ then
+         echo "$file owner has write permission"
+        fi
+if [ $ux == x ]
+ then
+         echo "$file onwer has execute permission"
+        fi
+echo "File permission for Group"
+gr=`ls -l $file | cut -c5`
+gw=`ls -l $file | cut -c6`
+gx=` ls -l $file | cut -c7`
+     if [ $gr == r ]
+     then
+        echo "$file group has read permission"
+        fi
+        if [ $gw == w ]
+ then
+         echo "$file group has write permission"
+        fi
+if [ $gx == x ]
+ then
+         echo "$file group has execute permission"
+        fi
+echo "File permission for others"
+or=`ls -l $file | cut -c8`
+ow=`ls -l $file | cut -c9`
+ox=` ls -l $file | cut -c10`
+if [ $or == r ]
+       then
+         echo "$file others have read permission"
+        fi
+        if [ $ow == w ]
+white_check_mark
+eyes
+raised_hands
+React
+Reply
+
+2:25
+then
+         echo "$file group has write permission"
+        fi
+if [ $gx == x ]
+ then
+         echo "$file group has execute permission"
+        fi
+echo "File permission for others"
+or=`ls -l $file | cut -c8`
+ow=`ls -l $file | cut -c9`
+ox=` ls -l $file | cut -c10`
+if [ $or == r ]
+       then
+         echo "$file others have read permission"
+        fi
+        if [ $ow == w ]
+       then
+         echo "$file others have write permission"
+       fi
+       if [ $ox == x ]
+            then
+        echo "$file others have excute permission"
+       fi
