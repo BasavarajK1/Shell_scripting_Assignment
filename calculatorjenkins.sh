@@ -1,15 +1,12 @@
 #!/bin/bash
 echo "Enter two numbers: "
-#read a
 $a
-#read b
 $b
 echo "Enter operand: "
 echo "1. Addition"
 echo "2. Subtraction"
 echo "3. Multiplication"
 echo "4. Division"
-#read op
 $op
 if [ $op == 1 ]
 then 
