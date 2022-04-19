@@ -1,6 +1,7 @@
 #!/bin/bash
 echo "The basic salary is: "
-read basic
+#read basic
+$basic
 dp=$(expr 50 \* $basic)
 dp=$(expr $dp / 100)
 echo "dp is $dp"
