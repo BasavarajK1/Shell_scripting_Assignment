@@ -1,5 +1,7 @@
 #!/bin/bash
 echo "Enter two numbers: "
+#read a
+#read b
 $a
 $b
 echo "Enter operand: "
