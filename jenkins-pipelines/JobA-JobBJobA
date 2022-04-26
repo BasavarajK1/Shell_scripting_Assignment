@@ -1,0 +1,16 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Job A triggered - Job B started') {
+            steps {
+                build 'Job B'
+            }
+        }
+        stage('Job B triggered - Job A started') {
+            steps {
+                build 'Job A'
+            }
+        }
+    }
+}

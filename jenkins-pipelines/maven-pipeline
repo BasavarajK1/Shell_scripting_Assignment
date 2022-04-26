@@ -1,0 +1,41 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Maven Installation') {
+            steps {
+                sh 'sudo apt-get install maven -y'
+            }
+        }
+        stage('Sample Project') {
+            steps {
+                sh '''mvn archetype:generate -DgroupId=com.aatmaani.app -DartifactId=my-webapp -DarchetypeArtifactId=maven-archetype-webapp -DarchetypeVersion=1.4 -DinteractiveMode=false
+                cd my-webapp
+                mvn clean install'''
+            }
+        }
+        stage('Target file to S3') {
+            steps {
+                withAWS(credentials: 'aws credentials', region: 'us-east-2') {
+                    sh '''cd /var/lib/jenkins/workspace/maven-pipeline/my-webapp
+                    aws s3 cp /var/lib/jenkins/workspace/maven-pipeline/my-webapp/target/my-webapp.war s3://basavaraj-my-bucket/maven-pipeline'''
+                }
+            }
+        }
+        stage('copy war to tomcat/webapps') {
+            steps {
+                sh '''
+                cd /var/lib/jenkins/workspace/maven-pipeline/my-webapp/target
+                ls
+                sudo cp -r /var/lib/jenkins/workspace/maven-pipeline/my-webapp/target/my-webapp.war /home/ubuntu/git/Slack_assignment/tomcat/webapps
+                chmod 777 my-webapp.war'''
+            }
+        }
+        stage('restart tomcat') {
+            steps {
+                sh '''sudo bash /home/ubuntu/git/Slack_assignment/tomcat/bin/shutdown.sh
+                sudo bash /home/ubuntu/git/Slack_assignment/tomcat/bin/startup.sh'''
+            }
+        }
+    }
+}

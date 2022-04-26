@@ -1,0 +1,23 @@
+node {
+  try {
+    stage('Git') {
+            git 'https://github.com/BasavarajK1/Shell_scripting_Assignment.git'
+        }
+    stage('salary job') {
+            sh 'bash jenkinssalary.sh $basic'
+        }
+
+    notifySuccessful()
+  } catch (e) {
+    currentBuild.result = "FAILED"
+    notifyFailed()
+    throw e
+  }
+}
+def notifySuccessful() {
+ slackSend channel: '#alert', message: 'Build is success', teamDomain: 'aatmaaniacademy'
+}
+
+def notifyFailed() {
+  slackSend channel: '#alert', message: 'Build is failed', teamDomain: 'aatmaaniacademy'
+}

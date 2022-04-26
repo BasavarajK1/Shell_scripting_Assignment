@@ -1,0 +1,12 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Disk utilization in slack') {
+            steps {
+               sh '''disk=$(df -h | grep /dev/root | awk \'{ print "basavaraj disk utilization=" $5 }\')
+                curl -X POST -H \'Content-type: application/json\' --data "{\\"text\\": \\"${disk}\\"}" https://hooks.slack.com/services/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'''
+            }
+        }
+    }
+}

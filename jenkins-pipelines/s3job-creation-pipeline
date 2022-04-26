@@ -1,0 +1,14 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Hello') {
+            steps {
+                withAWS(credentials: 'aws credentials', region: 'us-east-2') {
+                sh '''aws s3api create-bucket --bucket basavaraj-s3job --create-bucket-configuration LocationConstraint=us-east-2
+                aws s3 cp /home/ubuntu/git/error.sh s3://basavaraj-s3job '''
+                }
+            }
+        }
+    }
+}

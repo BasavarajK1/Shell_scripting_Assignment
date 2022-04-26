@@ -1,0 +1,42 @@
+pipeline {
+    agent any
+    stages {
+        stage('maven install') {
+            steps {
+                sh 'sudo apt-get install maven -y'
+            }
+        }
+        stage('maven project from github') {
+            steps {
+                git 'https://github.com/BasavarajK1/Maven-pipeline.git'
+            }
+        }
+        stage('install') {
+            steps {
+                sh '''cd mavengit/gitup
+                mvn clean install'''
+            }
+        }
+        stage('tomcat/webapps') {
+            steps {
+                sh '''cd /var/lib/jenkins/workspace/maven-pipeline-projectfromgithub/mavengit/gitup/target
+                sudo cp -r gitup.war /home/ubuntu/git/Slack_assignment/tomcat/webapps'''
+            }
+        }
+        stage('S3 with aws credentials') {
+            steps {
+                withAWS(credentials: 'aws credentials', region: 'us-east-2') {
+                sh '''cd mavengit/gitup/target
+                aws s3 cp gitup.war s3://basavaraj-my-bucket/maven-war/
+                '''
+                }
+            }
+        }
+        stage('tomcat restart') {
+            steps {
+                sh ''' sudo bash /home/ubuntu/git/Slack_assignment/tomcat/bin/shutdown.sh
+                sudo bash /home/ubuntu/git/Slack_assignment/tomcat/bin/startup.sh '''
+            }
+        }
+    }
+}

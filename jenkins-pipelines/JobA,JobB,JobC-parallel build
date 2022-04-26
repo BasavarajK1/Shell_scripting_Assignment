@@ -1,0 +1,24 @@
+pipeline {
+    agent any
+    stages {
+        stage('Run Jobs') {
+            parallel {
+                stage('Job AA') {
+                    steps {
+                        build 'Job AA'
+                    }
+                }
+                stage('Job BB') {
+                    steps {
+                        build 'Job BB'
+                    }
+                }
+                stage('Job CC') {
+                    steps {
+                        build 'Job CC'
+                    }
+                }
+            }
+        }
+    }
+}
