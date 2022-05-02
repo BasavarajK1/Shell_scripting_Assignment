@@ -1,0 +1,29 @@
+version: "0.1"
+services:
+        db:
+                image: mysql
+                container_name: mysql100
+                ports:
+                        - "100:3306"
+                environment:
+                        - MYSQL_ROOT_PASSWORD=admin
+                        - MYSQL_DATABASE=db
+                        - MYSQL_USER=admin
+                        - MYSQL_PASSWORD=admin
+        mongodb:
+                image: mongo
+                container_name: mongodb101
+                ports:
+                        - "101:27017"
+                environment:
+                        - MONGO_INITDB_ROOT_USERNAME=admin
+                        - MONGO_INITDB_ROOT_PASSWORD=admin
+        redisdb:
+                image: redis
+                container_name: redis102
+                ports:
+                        - "102:6379"
+                command: redis-server --loglevel warning --requirepass admin
+                environment:
+                        - REDIS_REPLICATION_MODE=master
+                        
